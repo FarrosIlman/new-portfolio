@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, Trophy, Smartphone, Medal, Globe } from 'lucide-react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, OrbitControls, Icosahedron } from '@react-three/drei';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import sakaImg from './assets/saka.jpg';
 import hospassImg from './assets/hospass.jpg';
@@ -12,7 +12,7 @@ import exampelImg from './assets/exampel.jpg';
 const tDict = {
   en: {
     navWorks: "Works", navStory: "Story", navAwards: "Awards", navContact: "Init_Contact()",
-    heroRole: "Software_Engineer", heroTitle1: "Building", heroTitle2: "Integrated", heroTitle3: "Tech", heroTitle4: "Ecosystems.",
+    heroRole: "Software_Engineer v2.0", heroTitle1: "Building", heroTitle2: "Integrated", heroTitle3: "Tech", heroTitle4: "Ecosystems.",
     heroDesc: "> Junior Front-End & Android Developer dedicated to creating efficient, stable, and impactful digital solutions.",
     stat1: "5+", stat1Desc: "Projects Built", stat2: "5+ YRS", stat2Desc: "Dev Obsession",
     worksHeading: "# Works", records: "DATABASE_RECORDS",
@@ -43,7 +43,7 @@ const tDict = {
   },
   id: {
     navWorks: "Karya", navStory: "Kisah", navAwards: "Penghargaan", navContact: "Hubungi()",
-    heroRole: "Software_Engineer", heroTitle1: "Membangun", heroTitle2: "Ekosistem", heroTitle3: "Teknologi", heroTitle4: "Terpadu.",
+    heroRole: "Software_Engineer v2.0", heroTitle1: "Membangun", heroTitle2: "Ekosistem", heroTitle3: "Teknologi", heroTitle4: "Terpadu.",
     heroDesc: "> Junior Front-End & Android Developer yang berdedikasi menciptakan solusi digital yang efisien, stabil, dan berdampak nyata.",
     stat1: "5+", stat1Desc: "Proyek Selesai", stat2: "5+ THN", stat2Desc: "Dedikasi Dev",
     worksHeading: "# Karya", records: "DATABASE_RECORDS",
@@ -94,31 +94,22 @@ const CyberCore = () => {
     if (coreRef.current) {
       const time = state.clock.elapsedTime;
 
-      // More subtle, elegant mouse interaction
-      const targetRotX = mouse.current.y * 1.2;
-      const targetRotY = mouse.current.x * 1.2;
+      const targetRotX = mouse.current.y * 2;
+      const targetRotY = mouse.current.x * 2;
 
-      // Smooth interpolation for the core
-      coreRef.current.rotation.x += (targetRotX + time * 0.4 - coreRef.current.rotation.x) * 0.05;
-      coreRef.current.rotation.y += (targetRotY + time * 0.6 - coreRef.current.rotation.y) * 0.05;
+      coreRef.current.rotation.x += (targetRotX + time * 0.2 - coreRef.current.rotation.x) * 0.1;
+      coreRef.current.rotation.y += (targetRotY + time * 0.3 - coreRef.current.rotation.y) * 0.1;
 
       const dist = Math.sqrt(mouse.current.x ** 2 + mouse.current.y ** 2);
-      // Pulsing effect combined with mouse distance
-      const targetScale = 2.0 + dist * 1.5 + Math.sin(time * 3) * 0.2;
-      coreRef.current.scale.lerp({ x: targetScale, y: targetScale, z: targetScale }, 0.08);
+      const targetScale = 2.0 + dist * 1.5 + Math.sin(time * 5) * 0.1;
+      coreRef.current.scale.lerp({ x: targetScale, y: targetScale, z: targetScale }, 0.1);
 
       if (ring1Ref.current && ring2Ref.current) {
-        // Rings react smoothly for a premium parallax effect
-        ring1Ref.current.rotation.x = time * 0.8 + mouse.current.y * 1.5;
-        ring1Ref.current.rotation.y = time * 1.2 + mouse.current.x * 1.5;
+        ring1Ref.current.rotation.x = time * 0.5 + mouse.current.y * 3;
+        ring1Ref.current.rotation.y = time * 0.8 + mouse.current.x * 3;
 
-        ring2Ref.current.rotation.x = -time * 0.5 - mouse.current.x * 1.0;
-        ring2Ref.current.rotation.z = time * 0.9 - mouse.current.y * 1.0;
-
-        // Add very subtle scale bouncing to rings
-        const ringScale = 1 + Math.sin(time * 1.5) * 0.02;
-        ring1Ref.current.scale.set(ringScale, ringScale, ringScale);
-        ring2Ref.current.scale.set(1.02 - Math.sin(time * 1.5) * 0.02, 1.02 - Math.sin(time * 1.5) * 0.02, 1.02 - Math.sin(time * 1.5) * 0.02);
+        ring2Ref.current.rotation.x = -time * 0.3 + mouse.current.x * 2;
+        ring2Ref.current.rotation.z = time * 0.6 + mouse.current.y * 2;
       }
     }
   });
@@ -179,80 +170,6 @@ const Background3D = () => {
   );
 };
 
-const CustomCursor = () => {
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-  const springConfig = { damping: 25, stiffness: 700 };
-  const cursorXSpring = useSpring(cursorX, springConfig);
-  const cursorYSpring = useSpring(cursorY, springConfig);
-
-  useEffect(() => {
-    const moveCursor = (e) => {
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
-    };
-    window.addEventListener('mousemove', moveCursor);
-    return () => window.removeEventListener('mousemove', moveCursor);
-  }, [cursorX, cursorY]);
-
-  return (
-    <>
-      {/* Outer ring */}
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-[#00f3ff]/40 rounded-full pointer-events-none z-[100] hidden md:block"
-        style={{ x: cursorXSpring, y: cursorYSpring }}
-      />
-      {/* Inner dot */}
-      <motion.div
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-[#00f3ff] rounded-full pointer-events-none z-[100] hidden md:block shadow-[0_0_8px_#00f3ff]"
-        style={{ x: useSpring(cursorX, { damping: 40, stiffness: 1000 }), y: useSpring(cursorY, { damping: 40, stiffness: 1000 }), marginLeft: 13, marginTop: 13 }}
-      />
-    </>
-  );
-};
-
-const NoiseOverlay = () => (
-  <div
-    className="fixed inset-0 z-[60] pointer-events-none opacity-[0.02] mix-blend-screen"
-    style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
-  ></div>
-);
-
-const GlitchText = ({ text }) => {
-  const [displayText, setDisplayText] = useState(text);
-  const chars = "!<>-_\\\\/[]{}—=+*^?#________";
-
-  const triggerGlitch = () => {
-    let iterations = 0;
-    const interval = setInterval(() => {
-      setDisplayText(prev =>
-        prev.split("").map((letter, index) => {
-          if (index < iterations) {
-            return text[index];
-          }
-          return chars[Math.floor(Math.random() * chars.length)];
-        }).join("")
-      );
-
-      if (iterations >= text.length) {
-        clearInterval(interval);
-      }
-
-      iterations += 1 / 3;
-    }, 30);
-  };
-
-  useEffect(() => {
-    triggerGlitch();
-  }, [text]);
-
-  return (
-    <span onMouseEnter={triggerGlitch} className="cursor-pointer inline-block">
-      {displayText}
-    </span>
-  );
-};
-
 const App = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -282,8 +199,7 @@ const App = () => {
 
   return (
     <div className="relative min-h-screen text-slate-200 font-sans selection:bg-[#00f3ff]/30 overflow-x-hidden">
-      <CustomCursor />
-      <NoiseOverlay />
+
       <Background3D />
 
       <div className="relative z-10">
@@ -343,7 +259,7 @@ const App = () => {
           >
             <div className="inline-flex items-center gap-4 mb-6 text-[#00f3ff] font-mono text-xs uppercase tracking-[0.4em]">
               <span className="w-10 h-[2px] bg-[#00f3ff] shadow-[0_0_10px_#00f3ff]"></span>
-              <GlitchText text={t.heroRole} />
+              <span>{t.heroRole}</span>
             </div>
 
             <h1 className="text-5xl sm:text-7xl md:text-[6rem] font-black leading-[1.1] tracking-tighter mb-8 text-white uppercase">
@@ -432,12 +348,8 @@ const App = () => {
             {t.contactTitle1} <span className="text-glow-cyan">{t.contactTitle2}</span>
           </h2>
           <div className="flex flex-col sm:flex-row justify-center gap-10 font-mono text-sm">
-            <a href="mailto:rosilman000@gmail.com" className="hud-panel px-8 py-4 hover:bg-[#00f3ff]/10 transition-colors border-[#00f3ff]">
-              {t.emailBtn}
-            </a>
-            <a href="https://linkedin.com/in/farrosilman" target="_blank" rel="noreferrer" className="hud-panel px-8 py-4 hover:bg-[#bc13fe]/10 transition-colors border-[#bc13fe] shadow-[0_0_15px_rgba(188,19,254,0.05),inset_0_0_20px_rgba(188,19,254,0.02)]">
-              {t.linkedinBtn}
-            </a>
+            <a href="mailto:rosilman000@gmail.com" className="hud-panel px-8 py-4 hover:bg-[#00f3ff]/10 transition-colors border-[#00f3ff]">{t.emailBtn}</a>
+            <a href="https://linkedin.com/in/farrosilman" target="_blank" rel="noreferrer" className="hud-panel px-8 py-4 hover:bg-[#bc13fe]/10 transition-colors border-[#bc13fe] shadow-[0_0_15px_rgba(188,19,254,0.05),inset_0_0_20px_rgba(188,19,254,0.02)]">{t.linkedinBtn}</a>
           </div>
         </section>
 
@@ -492,34 +404,6 @@ const Award = ({ icon, title, rank }) => (
 );
 
 const ProjectItem = ({ proj, index, accessDataStr }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["6deg", "-6deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-6deg", "6deg"]);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -528,23 +412,13 @@ const ProjectItem = ({ proj, index, accessDataStr }) => {
       transition={{ duration: 0.8 }}
       className={`flex flex-col lg:grid lg:grid-cols-12 gap-8 md:gap-16 items-center`}
     >
-      <div className={`w-full lg:col-span-7 ${index % 2 !== 0 ? 'lg:order-2' : ''}`} style={{ perspective: 1200 }}>
-        <motion.div
-          className="hud-panel overflow-hidden aspect-[16/10] group cursor-pointer p-2 relative"
-          style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="absolute inset-0 bg-[#00f3ff]/5 z-10 pointer-events-none group-hover:bg-transparent transition-colors duration-500" style={{ transform: "translateZ(30px)" }}></div>
+      <div className={`w-full lg:col-span-7 ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
+        <div className="hud-panel overflow-hidden aspect-[16/10] group cursor-pointer p-2">
+          <div className="absolute inset-0 bg-[#00f3ff]/5 z-10 pointer-events-none group-hover:bg-transparent transition-colors duration-500"></div>
           {/* Scanline overlay for image */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,243,255,0.05)_50%)] bg-[length:100%_4px] z-20 pointer-events-none" style={{ transform: "translateZ(40px)" }}></div>
-          <motion.img
-            src={proj.image}
-            alt={proj.title}
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-            style={{ transform: "translateZ(20px)" }}
-          />
-        </motion.div>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0)_50%,rgba(0,243,255,0.05)_50%)] bg-[length:100%_4px] z-20 pointer-events-none"></div>
+          <img src={proj.image} alt={proj.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+        </div>
       </div>
       <div className="lg:col-span-5 px-2 md:px-0">
         <div className="font-mono text-[10px] text-slate-500 uppercase tracking-widest mb-4 border-l-2 border-[#00f3ff] pl-3">{proj.tag}</div>
