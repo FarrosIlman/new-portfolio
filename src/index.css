@@ -1,129 +1,125 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-mono: 'Fira Code', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --font-sans: 'Inter', system-ui, sans-serif;
-  
-  --color-neon-cyan: #00f3ff;
-  --color-neon-purple: #bc13fe;
-  --color-dark-bg: #030305;
-  --color-hud-bg: rgba(3, 3, 5, 0.7);
+
+  --color-plum-dark: #0a0810;
+  --color-pink-accent: #00f2fe;
+  --color-coral-accent: #4facfe;
+  --color-light-bg: #fdf1e3;
+  --color-light-text: #3e2723;
 }
 
 :root {
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.8s ease,
+    color 0.8s ease;
   color-scheme: dark;
 }
 
 body {
-  background-color: #030305;
-  color: #e2e8f0;
+  background-color: var(--color-plum-dark);
+  color: #ffffff;
   overflow-x: hidden;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-/* Force dark mode for Web3 aesthetic */
-.dark body, body {
-  background-color: #030305;
+/* Light mode overrides (triggered by Gallery section) */
+body.light-theme {
+  background-color: var(--color-light-bg);
+  color: var(--color-light-text);
+  color-scheme: light;
 }
 
-/* Cyber Grid Background */
-.cyber-grid {
-  background-image: 
-    linear-gradient(rgba(0, 243, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 243, 255, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
-  background-position: center center;
+/* Radial Glow Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.05), transparent 60%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Fine Grain Texture */
+body::after {
+  content: '';
   position: fixed;
   inset: 0;
-  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  z-index: -1;
   pointer-events: none;
-  transform: perspective(500px) rotateX(60deg) translateY(-100px) scale(3);
-  animation: grid-move 20s linear infinite;
-  opacity: 0.4;
+  mix-blend-mode: screen;
+}
+body.light-theme::after {
+  mix-blend-mode: multiply;
+  opacity: 0.05;
 }
 
-@keyframes grid-move {
-  0% { transform: perspective(500px) rotateX(60deg) translateY(0) scale(3); }
-  100% { transform: perspective(500px) rotateX(60deg) translateY(40px) scale(3); }
+/* Gradients */
+.bg-gradient-coral {
+  background: linear-gradient(135deg, var(--color-pink-accent), var(--color-coral-accent));
 }
 
-/* HUD Panel */
+.text-gradient-coral {
+  background: linear-gradient(135deg, var(--color-pink-accent), var(--color-coral-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Base components */
 .hud-panel {
-  background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 243, 255, 0.2);
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.05), inset 0 0 20px rgba(0, 243, 255, 0.02);
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-  position: relative;
+  background: rgba(10, 8, 16, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  border-radius: 24px;
 }
-
-.hud-panel::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid #00f3ff;
-  border-left: 2px solid #00f3ff;
-}
-
-/* Glowing Text */
-.text-glow-cyan {
-  color: #00f3ff;
-  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5), 0 0 20px rgba(0, 243, 255, 0.3);
-}
-
-.text-glow-purple {
-  color: #bc13fe;
-  text-shadow: 0 0 10px rgba(188, 19, 254, 0.5), 0 0 20px rgba(188, 19, 254, 0.3);
+body.light-theme .hud-panel {
+  background: rgba(253, 241, 227, 0.7);
+  border: 1px solid rgba(62, 39, 35, 0.1);
 }
 
 .font-mono {
-  font-family: 'Fira Code', 'Courier New', monospace;
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.glitch-effect {
-  position: relative;
+.font-sans {
+  font-family: 'Inter', sans-serif;
 }
-.glitch-effect::before, .glitch-effect::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #030305;
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
 }
-.glitch-effect::before {
-  left: 2px;
-  text-shadow: -1px 0 red;
-  clip: rect(24px, 550px, 90px, 0);
-  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-.glitch-effect::after {
-  left: -2px;
-  text-shadow: -1px 0 blue;
-  clip: rect(85px, 550px, 140px, 0);
-  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+.perspective-1000 {
+  perspective: 1000px;
 }
-@keyframes glitch-anim {
-  0% { clip: rect(74px, 9999px, 83px, 0); }
-  20% { clip: rect(100px, 9999px, 4px, 0); }
-  40% { clip: rect(98px, 9999px, 8px, 0); }
-  60% { clip: rect(66px, 9999px, 16px, 0); }
-  80% { clip: rect(27px, 9999px, 49px, 0); }
-  100% { clip: rect(21px, 9999px, 48px, 0); }
+.preserve-3d {
+  transform-style: preserve-3d;
 }
-@keyframes glitch-anim-2 {
-  0% { clip: rect(65px, 9999px, 100px, 0); }
-  20% { clip: rect(3px, 9999px, 32px, 0); }
-  40% { clip: rect(48px, 9999px, 20px, 0); }
-  60% { clip: rect(96px, 9999px, 84px, 0); }
-  80% { clip: rect(80px, 9999px, 94px, 0); }
-  100% { clip: rect(54px, 9999px, 12px, 0); }
+.backface-hidden {
+  backface-visibility: hidden;
 }
