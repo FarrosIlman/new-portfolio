@@ -1,9 +1,9 @@
-# 🚀 Muchammad Farros Ilman Haq — Digital Portfolio
+# 🚀 Muchammad Farros Ilman Haq — Interactive Digital Portfolio
 
 Selamat datang di repositori **Digital Portfolio** saya.  
 Proyek ini merupakan representasi perjalanan profesional saya sebagai _Software Developer_, dengan fokus pada **Android Native Development** dan **Web Engineering**.
 
-Dibangun menggunakan **React + Vite** serta **Tailwind CSS**, portofolio ini dirancang dengan pendekatan modern — cepat, ringan, responsif, dan interaktif. Setiap detail dirancang untuk memberikan pengalaman pengguna yang elegan sekaligus mempertahankan performa optimal.
+Dibangun menggunakan **React + Vite**, **Tailwind CSS**, serta integrasi 3D dan animasi tingkat lanjut (**Three.js** & **Framer Motion**), portofolio ini dirancang untuk memberikan pengalaman yang interaktif, mendalam (immersive), elegan, dan responsif.
 
 ---
 
@@ -15,32 +15,27 @@ Ia adalah dokumentasi perjalanan belajar, eksplorasi teknologi, serta implementa
 Fokus utama:
 
 - Menampilkan rekam jejak akademik dan profesional secara visual dan terstruktur.
-- Menyajikan showcase proyek dengan pendekatan teknis yang jelas.
-- Menerapkan best practice dalam arsitektur frontend modern.
+- Menyajikan showcase proyek dengan pendekatan teknis yang jelas dan interaktif.
+- Menerapkan best practice dalam arsitektur frontend modern, termasuk integrasi elemen 3D dan animasi dinamis.
 
 ---
 
 ## ✨ Fitur Unggulan
 
-### 🌫 Glassmorphism UI
+### 🌌 3D Immersive Elements (Three.js & R3F)
+Pengalaman visual yang mendalam dengan elemen 3D interaktif, seperti efek _Time Tunnel_ dan efek visual pada angka-angka (_Numbers Warp_), memberikan kesan futuristik yang kuat.
 
-Antarmuka modern dengan efek blur transparan yang memberikan kesan futuristik namun tetap minimalis.
+### 🎭 Fluid Animations (Framer Motion)
+Animasi dinamis berbasis _Framer Motion_ untuk transisi halaman yang mulus, efek _scroll-reveal_ yang natural, dan interaksi elemen UI yang sangat organik.
 
-### 🔄 Scroll Progress Tracker
+### 🌫 Glassmorphism & Modern UI
+Antarmuka modern dengan efek blur transparan yang memberikan kesan elegan namun tetap minimalis, ditambah dengan sentuhan polesan global (Global Polish) seperti efek *grain/noise* untuk tekstur, kustomisasi _cursor_, dan _scrollbar_.
 
-Tombol _Back-to-Top_ interaktif dengan indikator progres scroll 360° secara real-time.
+### 🔄 Interactive Progress & Navigation
+Tombol _Back-to-Top_ interaktif dengan indikator progres scroll 360° secara real-time dan navigasi _smooth-scroll_ yang intuitif.
 
-### 🎞 Organic Animations
-
-Animasi dinamis berbasis CSS Keyframes dan _custom React hooks_ untuk efek _scroll-reveal_ yang halus dan natural.
-
-### 🕰 Responsive Timeline
-
-Timeline akademik dan profesional yang responsif dan adaptif pada berbagai ukuran layar.
-
-### ⚡ Performance-Oriented Architecture
-
-Dibangun menggunakan **Vite** untuk pengalaman pengembangan cepat dan optimasi aset yang efisien.
+### 🕰 Responsive Journey Timeline
+Timeline akademik dan profesional yang interaktif, merespons setiap scroll pengguna, serta adaptif pada berbagai ukuran layar ponsel dan desktop.
 
 ---
 
@@ -48,35 +43,33 @@ Dibangun menggunakan **Vite** untuk pengalaman pengembangan cepat dan optimasi a
 
 | Layer            | Teknologi                                              |
 | ---------------- | ------------------------------------------------------ |
-| Frontend Library | React.js                                               |
+| Frontend Library | React.js, ReactDOM                                     |
 | Build Tool       | Vite                                                   |
-| Styling          | Tailwind CSS                                           |
-| Animasi          | CSS Keyframes & Custom React Hooks (`useScrollReveal`) |
+| Styling          | Tailwind CSS v4, CLSX, Tailwind-Merge                  |
+| 3D & WebGL       | Three.js, React Three Fiber, React Three Drei          |
+| Animasi          | Framer Motion, Canvas Confetti                         |
+| Icons            | Lucide React                                           |
 
 Pendekatan ini dipilih untuk memastikan:
 
-- Modularitas komponen
-- Maintainability jangka panjang
-- Performa tinggi dengan bundle minimal
+- Modularitas komponen yang sangat baik
+- Pengalaman pengguna (UX) yang interaktif dan *memorable*
+- Maintainability jangka panjang dengan performa optimal
 
 ---
 
 ## 📂 Highlight Proyek
 
 ### 1️⃣ HOS-Pass
-
 Sistem otomasi presensi biometrik berbasis **Android Native** dengan integrasi:
-
 - _Face Recognition_
 - _Geofencing_
 - Validasi lokasi dan identitas secara real-time
 
 ### 2️⃣ Exampel
-
 Aplikasi **Secure Exam Browser** dengan sistem proteksi tingkat lanjut untuk menjaga integritas ujian digital.
 
 ### 3️⃣ Stunting Monitoring
-
 Platform riset berbasis web untuk pemantauan tumbuh kembang anak secara kolaboratif, dirancang untuk mendukung analisis dan pelaporan data secara terstruktur.
 
 ---
@@ -86,13 +79,13 @@ Platform riset berbasis web untuk pemantauan tumbuh kembang anak secara kolabora
 Clone repository:
 
 ```bash
-git clone https://github.com/FarrosIlman/parrosz-portfolio.git
+git clone https://github.com/FarrosIlman/new-portfolio.git
 ```
 
 Masuk ke direktori proyek:
 
 ```bash
-cd parrosz-portfolio
+cd new-portfolio
 ```
 
 Install dependensi:
@@ -118,7 +111,6 @@ http://localhost:5173
 ## 📬 Mari Terhubung
 
 Saya terbuka untuk:
-
 - Kolaborasi proyek
 - Diskusi teknologi
 - Peluang profesional
