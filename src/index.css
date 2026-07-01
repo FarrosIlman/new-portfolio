@@ -124,3 +124,34 @@ html {
 .backface-hidden {
   backface-visibility: hidden;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-plum-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-pink-accent), var(--color-coral-accent));
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-coral-accent), var(--color-pink-accent));
+}
+
+/* Scrollbar on light mode */
+.light-theme::-webkit-scrollbar-track {
+  background: var(--color-light-bg);
+}
+
+.light-theme::-webkit-scrollbar-thumb {
+  background: rgba(62, 39, 35, 0.4);
+}
+
+.light-theme::-webkit-scrollbar-thumb:hover {
+  background: rgba(62, 39, 35, 0.6);
+}
