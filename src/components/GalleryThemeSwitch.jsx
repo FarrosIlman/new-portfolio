@@ -1,6 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
+import sakaImg from '../assets/saka.jpg';
+import hospassImg from '../assets/hospass.jpg';
+import sisfoImg from '../assets/sisfo.jpg';
+import exampelImg from '../assets/exampel.jpg';
+
 const PhotoCard = ({ photo, index }) => {
   const cardRef = useRef(null);
   const x = useMotionValue(0);
@@ -81,22 +86,22 @@ const GalleryThemeSwitch = () => {
   const photos = [
     {
       id: 1,
-      src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800',
+      src: sakaImg,
       caption: 'Building SAKA Architecture',
     },
     {
       id: 2,
-      src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=800',
+      src: hospassImg,
       caption: 'HOS-Pass Testing Phase',
     },
     {
       id: 3,
-      src: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800',
+      src: sisfoImg,
       caption: 'Late Night Bug Fixing',
     },
     {
       id: 4,
-      src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800',
+      src: exampelImg,
       caption: 'Exampel 3D Deployment',
     },
   ];
