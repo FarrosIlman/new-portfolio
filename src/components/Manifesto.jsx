@@ -20,7 +20,7 @@ const Manifesto = () => {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 80%', 'end 60%'], // Triggers while scrolling through the section
+    offset: ['start 85%', 'center center'], // Start revealing near bottom, finish when centered
   });
 
   const paragraph1 =
