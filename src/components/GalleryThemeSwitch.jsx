@@ -64,8 +64,8 @@ const PhotoCard = ({ photo, index }) => {
 const GalleryThemeSwitch = () => {
   const containerRef = useRef(null);
 
-  // Trigger when the section is taking up at least 40% of the viewport
-  const isInView = useInView(containerRef, { amount: 0.4, margin: '0px 0px -10% 0px' });
+  // Trigger when the section is somewhat in the viewport
+  const isInView = useInView(containerRef, { amount: 0.1, margin: '-10% 0px -10% 0px' });
 
   useEffect(() => {
     if (isInView) {
