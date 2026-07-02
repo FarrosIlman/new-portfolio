@@ -208,7 +208,7 @@ const JourneyTimeline = () => {
   const years = ['2024-2025', '2025', '2025-Now'];
 
   return (
-    <section className="py-24 lg:py-32 px-6 md:px-12 bg-plum-dark relative z-10">
+    <section aria-label="Journey Timeline" className="py-24 lg:py-32 px-6 md:px-12 bg-plum-dark relative z-10">
       {/* Sticky Scrubber */}
       <div className="sticky top-24 z-50 py-4 mb-12 flex justify-center pointer-events-none">
         <div className="bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-6 py-2 flex gap-6 pointer-events-auto shadow-2xl transition-all duration-300">

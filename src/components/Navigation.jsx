@@ -22,13 +22,15 @@ const Navigation = () => {
 
   return (
     <nav
+      aria-label="Main Navigation"
       className={`fixed top-0 w-full z-[100] transition-all duration-300 ${scrolled ? 'py-4 backdrop-blur-lg bg-black/40 border-b border-white/5' : 'py-8 bg-transparent'}`}
     >
       <div className="container mx-auto px-6 md:px-12 flex justify-between items-center max-w-7xl">
         {/* Logo */}
-        <div
+        <a
+          href="/"
+          aria-label="Home"
           className="flex items-center gap-3 group cursor-pointer"
-          onClick={() => window.scrollTo(0, 0)}
         >
           <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md flex items-center justify-center shadow-[0_4_20px_rgba(0,0,0,0.3)] group-hover:bg-white/10 transition-all duration-300">
             <span className="font-sans font-black text-gradient-coral text-lg leading-none">
@@ -38,7 +40,7 @@ const Navigation = () => {
           <span className="font-sans font-bold text-lg tracking-tight hidden sm:block text-white/90 group-hover:text-white transition-colors duration-300">
             Farros <span className="text-white/40 font-normal">Ilman</span>
           </span>
-        </div>
+        </a>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
@@ -64,6 +66,7 @@ const Navigation = () => {
 
         {/* Mobile Hamburger */}
         <button
+          aria-label="Toggle mobile menu"
           className="md:hidden text-white p-2"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >

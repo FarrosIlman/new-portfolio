@@ -100,6 +100,7 @@ const ContactCTA = () => {
               href={link.href}
               target="_blank"
               rel="noreferrer"
+              aria-label={`Visit my ${link.title}`}
               onClick={link.isPrimary ? triggerConfetti : undefined}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

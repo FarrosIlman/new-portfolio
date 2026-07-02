@@ -28,7 +28,7 @@ const Hero = () => {
   const flipAngle = useSpring(flipAngleRaw, { stiffness: 100, damping: 20 });
 
   return (
-    <section ref={containerRef} className="relative w-full h-[200vh]">
+    <section ref={containerRef} aria-label="Hero" className="relative w-full h-[200vh]">
       <div className="sticky top-0 h-[100dvh] w-full flex items-start lg:items-center justify-center overflow-hidden pt-28 sm:pt-32 pb-10 lg:pt-20 lg:pb-0">
         <div className="container mx-auto px-6 md:px-12 max-w-6xl h-full flex flex-col justify-start lg:justify-center mt-2 sm:mt-8 lg:mt-0">
           <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-8 items-center justify-center">
@@ -59,6 +59,7 @@ const Hero = () => {
 
               <a
                 href="#journey"
+                aria-label="Follow my journey timeline"
                 className="group flex items-center gap-2 sm:gap-4 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-gradient-coral text-white font-sans font-bold hover:shadow-[0_0_30px_rgba(255,77,138,0.4)] transition-all text-sm sm:text-base mx-auto lg:mx-0"
               >
                 <span>Follow my journey</span>
@@ -153,7 +154,7 @@ const Hero = () => {
                     className="absolute inset-0 backface-hidden rounded-[32px] overflow-hidden border border-white/20 shadow-2xl bg-black"
                     style={{ transform: 'rotateY(180deg)' }}
                   >
-                    <img src={farrosImg} alt="Portrait" className="w-full h-full object-cover" />
+                    <img src={farrosImg} alt="Muchammad Farros Ilman Haq - Software Engineer Portrait" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent flex flex-col justify-end p-4 sm:p-6 md:p-8">
                       <h3 className="font-sans font-black text-white text-xl sm:text-2xl md:text-3xl leading-tight">
                         M. Farros <br /> Ilman Haq
