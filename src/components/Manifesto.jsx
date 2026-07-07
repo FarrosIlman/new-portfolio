@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 // Helper component for individual kinetic words
 const KineticWord = ({ children, progress, range }) => {
@@ -17,16 +18,15 @@ const KineticWord = ({ children, progress, range }) => {
 
 const Manifesto = () => {
   const containerRef = useRef(null);
+  const { t } = useLanguage();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start 85%', 'center center'], // Start revealing near bottom, finish when centered
   });
 
-  const paragraph1 =
-    "Hi, I'm Farros Ilman. I am a passionate software engineer dedicated to building robust, scalable web and mobile applications.";
-  const paragraph2 =
-    'I love solving complex problems, from developing anti-cheat systems to integrating modern technology like face recognition into real-world environments.';
+  const paragraph1 = t.manifesto.p1;
+  const paragraph2 = t.manifesto.p2;
 
   const words1 = paragraph1.split(' ');
   const words2 = paragraph2.split(' ');
@@ -40,7 +40,7 @@ const Manifesto = () => {
     >
       <div className="container mx-auto max-w-4xl">
         <h3 className="font-mono text-pink-accent uppercase tracking-[0.4em] text-xs mb-12">
-          About Me
+          {t.manifesto.title}
         </h3>
 
         <div className="font-sans font-black text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-[1.4] text-white">
@@ -71,7 +71,7 @@ const Manifesto = () => {
             className="text-3xl sm:text-4xl md:text-5xl mt-20"
             initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-            viewport={{ once: true, margin: '-20%' }}
+            viewport={{ margin: '-20%' }}
             transition={{ duration: 1, delay: 0.2 }}
           >
             Stay hungry.

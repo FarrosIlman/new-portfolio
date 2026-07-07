@@ -5,6 +5,7 @@ import exampelImg from '../assets/exampel.jpg';
 import sisfoImg from '../assets/sisfo.jpg';
 import hospassImg from '../assets/hospass.jpg';
 import sakaImg from '../assets/saka.jpg';
+import { useLanguage } from '../context/LanguageContext';
 
 const MilestoneCard = ({ item, index, scrollYProgress }) => {
   // We divide the scroll space so all 5 items finish by 0.75
@@ -69,6 +70,7 @@ const MilestoneCard = ({ item, index, scrollYProgress }) => {
 
 const TimeTunnel = () => {
   const containerRef = useRef(null);
+  const { t } = useLanguage();
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -86,12 +88,12 @@ const TimeTunnel = () => {
       z: -500,
       x: -35,
       img: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800',
-      title: 'Pemantauan Stunting',
+      title: t.journey.projects.stunting.shortTitle,
     },
-    { year: '2025', z: -1000, x: 35, img: sakaImg, title: 'SAKA' },
-    { year: '2025', z: -1500, x: -35, img: exampelImg, title: 'Exampel' },
-    { year: '2025', z: -2000, x: 35, img: hospassImg, title: 'HOS-Pass' },
-    { year: '2025-Now', z: -2500, x: -35, img: sisfoImg, title: 'Web SIS' },
+    { year: '2025', z: -1000, x: 35, img: sakaImg, title: t.journey.projects.saka.shortTitle },
+    { year: '2025', z: -1500, x: -35, img: exampelImg, title: t.journey.projects.exampel.shortTitle },
+    { year: '2025', z: -2000, x: 35, img: hospassImg, title: t.journey.projects.hospass.shortTitle },
+    { year: '2025-Now', z: -2500, x: -35, img: sisfoImg, title: t.journey.projects.sisfo.shortTitle },
   ];
 
   return (
@@ -123,11 +125,11 @@ const TimeTunnel = () => {
             }}
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-sans font-black text-white uppercase tracking-tighter text-glow-cyan text-center">
-              The <br />
-              <span className="text-gradient-coral">Journey</span>
+              {t.journey.titlePrefix && <>{t.journey.titlePrefix} <br /></>}
+              <span className="text-gradient-coral">{t.journey.title}</span>
             </h2>
             <p className="mt-8 text-white/60 font-mono text-sm sm:text-base tracking-[0.3em] uppercase">
-              Keep building, keep shipping.
+              {t.tunnel.text}
             </p>
           </motion.div>
         </div>

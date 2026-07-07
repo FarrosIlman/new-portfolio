@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
 
 const PhotoCard = ({ photo, index }) => {
   const cardRef = useRef(null);
@@ -33,7 +34,7 @@ const PhotoCard = ({ photo, index }) => {
       onMouseLeave={handleMouseLeave}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ margin: '-100px' }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       style={{ rotateX, rotateY }}
       className="relative group rounded-3xl aspect-square perspective-1000 shadow-xl cursor-pointer"
@@ -63,6 +64,7 @@ const PhotoCard = ({ photo, index }) => {
 
 const GalleryThemeSwitch = () => {
   const containerRef = useRef(null);
+  const { t } = useLanguage();
 
   // Trigger when the section is somewhat in the viewport
   const isInView = useInView(containerRef, { amount: 0.1, margin: '-10% 0px -10% 0px' });
@@ -82,22 +84,22 @@ const GalleryThemeSwitch = () => {
     {
       id: 1,
       src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800',
-      caption: 'Building SAKA Architecture',
+      caption: t.gallery.photos["1"],
     },
     {
       id: 2,
       src: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=800',
-      caption: 'HOS-Pass Testing Phase',
+      caption: t.gallery.photos["2"],
     },
     {
       id: 3,
       src: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800',
-      caption: 'Late Night Bug Fixing',
+      caption: t.gallery.photos["3"],
     },
     {
       id: 4,
       src: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=800',
-      caption: 'Exampel 3D Deployment',
+      caption: t.gallery.photos["4"],
     },
   ];
 
@@ -110,13 +112,13 @@ const GalleryThemeSwitch = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <span className="inline-block px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 font-mono text-[10px] uppercase tracking-[0.3em] mb-4">
-            Behind the Scenes
+            {t.gallery.tag}
           </span>
           <h2 className="font-sans font-black text-4xl md:text-6xl tracking-tight mb-2">
-            The <span className="text-gradient-coral">Moments</span>
+            {t.gallery.title && `${t.gallery.title} `}<span className="text-gradient-coral">{t.gallery.titleHighlight}</span>
           </h2>
           <p className="font-sans italic text-lg opacity-70 max-w-xl mx-auto">
-            Not just lines of code, but people, places, and milestones that shape the journey.
+            {t.gallery.desc}
           </p>
         </div>
 

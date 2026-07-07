@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Camera, Mail, ArrowUpRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { useLanguage } from '../context/LanguageContext';
 
 const LinkedinIcon = ({ size = 24, className = '' }) => (
   <svg
@@ -23,6 +24,7 @@ const LinkedinIcon = ({ size = 24, className = '' }) => (
 );
 
 const ContactCTA = () => {
+  const { t } = useLanguage();
   const triggerConfetti = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (rect.left + rect.width / 2) / window.innerWidth;
@@ -77,19 +79,19 @@ const ContactCTA = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ amount: 0.2 }}
             className="text-5xl md:text-7xl font-sans font-black uppercase tracking-tight text-white mb-4"
           >
-            Let's <span className="text-gradient-coral">Connect</span>
+            {t.contact.title.split(' ')[0]} <span className="text-gradient-coral">{t.contact.title.split(' ').slice(1).join(' ')}</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ amount: 0.2 }}
             transition={{ delay: 0.1 }}
-            className="font-mono text-white/60 uppercase tracking-widest text-sm"
+            className="font-mono text-white/60 uppercase tracking-widest text-sm max-w-lg mx-auto"
           >
-            Follow the journey or start a new one together
+            {t.contact.desc}
           </motion.p>
         </div>
 
@@ -104,7 +106,7 @@ const ContactCTA = () => {
               onClick={link.isPrimary ? triggerConfetti : undefined}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ amount: 0.2 }}
               transition={{ delay: i * 0.1 + 0.2 }}
               className={`group relative p-8 rounded-3xl border flex flex-col items-start transition-all duration-300 hover:-translate-y-2 ${link.colorClass} ${!link.isPrimary && 'bg-black/40 backdrop-blur-md'}`}
             >

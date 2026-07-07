@@ -2,10 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { ArrowRight, Trophy, Users } from 'lucide-react';
 import farrosImg from '../assets/Farros Ilman.jpg';
+import { useLanguage } from '../context/LanguageContext';
 
 const Hero = () => {
   const containerRef = useRef(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -29,9 +31,9 @@ const Hero = () => {
 
   return (
     <section ref={containerRef} aria-label="Hero" className="relative w-full h-[200vh]">
-      <div className="sticky top-0 h-[100dvh] w-full flex items-start lg:items-center justify-center overflow-hidden pt-28 sm:pt-32 pb-10 lg:pt-20 lg:pb-0">
-        <div className="container mx-auto px-6 md:px-12 max-w-6xl h-full flex flex-col justify-start lg:justify-center mt-2 sm:mt-8 lg:mt-0">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-8 items-center justify-center">
+      <div className="sticky top-0 h-[100dvh] w-full flex items-start lg:items-center justify-center pt-24 sm:pt-28 pb-8 lg:pt-20 lg:pb-0">
+        <div className="container mx-auto px-6 md:px-12 max-w-6xl h-full flex flex-col justify-start lg:justify-center mt-2 lg:mt-0">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-8 items-center justify-center">
             {/* Left Column: Text Content */}
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -39,7 +41,7 @@ const Hero = () => {
               transition={{ duration: 1, delay: 0.2 }}
               className="flex flex-col items-start z-10"
             >
-              <div className="inline-flex items-center gap-3 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-4 sm:mb-8 mt-2 sm:mt-0">
+              <div className="inline-flex items-center gap-3 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-3 sm:mb-6 mt-2 sm:mt-0">
                 <div className="w-2 h-2 rounded-full bg-gradient-coral animate-pulse"></div>
                 <span className="font-mono text-[9px] sm:text-[10px] md:text-xs uppercase tracking-widest text-white/80">
                   Street-tested · Battle-proven
@@ -47,25 +49,24 @@ const Hero = () => {
               </div>
 
               {/* Clamp title size for responsiveness, large and bold as requested */}
-              <h1 className="font-sans font-black text-white leading-[1.05] tracking-tight mb-2 sm:mb-8 uppercase text-3xl sm:text-5xl lg:text-[56px] xl:text-[64px]">
+              <h1 className="font-sans font-black text-white leading-[1.05] tracking-tight mb-2 sm:mb-6 uppercase text-3xl sm:text-5xl lg:text-[56px] xl:text-[64px]">
                 Building Integrated <br className="hidden sm:block" />
                 Tech <span className="text-gradient-coral">Ecosystems.</span>
               </h1>
 
-              <p className="font-mono text-white/60 text-xs sm:text-sm md:text-base max-w-md mb-4 sm:mb-10 leading-relaxed">
-                Junior Front-End & Android Developer dedicated to creating efficient, stable, and
-                impactful digital solutions.
+              <p className="font-mono text-white/60 text-xs sm:text-sm md:text-base max-w-md mb-4 sm:mb-8 leading-relaxed">
+                {t.hero.description}
               </p>
 
               <a
                 href="#journey"
                 aria-label="Follow my journey timeline"
-                className="group flex items-center gap-2 sm:gap-4 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-gradient-coral text-white font-sans font-bold hover:shadow-[0_0_30px_rgba(255,77,138,0.4)] transition-all text-sm sm:text-base mx-auto lg:mx-0"
+                className="group inline-flex w-fit whitespace-nowrap items-center gap-2 sm:gap-4 px-6 py-3 sm:px-8 sm:py-4 rounded-full bg-gradient-coral text-white font-sans font-bold hover:shadow-[0_0_30px_rgba(255,77,138,0.4)] transition-all text-sm sm:text-base mx-auto lg:mx-0"
               >
-                <span>Follow my journey</span>
+                <span>{t.hero.viewWork}</span>
                 <ArrowRight
                   size={18}
-                  className="group-hover:translate-x-1 transition-transform sm:w-[18px] sm:h-[18px]"
+                  className="group-hover:translate-x-1 transition-transform sm:w-[18px] sm:h-[18px] shrink-0"
                 />
               </a>
             </motion.div>
@@ -144,7 +145,7 @@ const Hero = () => {
                         SCROLL
                       </h3>
                       <p className="font-mono text-xs opacity-90 uppercase tracking-[0.4em] drop-shadow-md">
-                        To Reveal
+                        {t.hero.scroll}
                       </p>
                     </div>
                   </div>

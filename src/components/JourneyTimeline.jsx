@@ -5,9 +5,10 @@ import sakaImg from '../assets/saka.jpg';
 import hospassImg from '../assets/hospass.jpg';
 import sisfoImg from '../assets/sisfo.jpg';
 import exampelImg from '../assets/exampel.jpg';
+import { useLanguage } from '../context/LanguageContext';
 
 // Reusable Tilt Card Component with Cursor Spotlight
-const JourneyCard = ({ project, isFeatured, onInView }) => {
+const JourneyCard = ({ project, isFeatured, onInView, t }) => {
   const cardRef = useRef(null);
 
   // Track visibility for scrubber
@@ -65,7 +66,7 @@ const JourneyCard = ({ project, isFeatured, onInView }) => {
       className={`relative rounded-3xl p-[1px] overflow-hidden preserve-3d h-full ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-10%' }}
+      viewport={{ margin: '-10%' }}
     >
       {/* Rotating Gradient Border */}
       <div
@@ -135,7 +136,7 @@ const JourneyCard = ({ project, isFeatured, onInView }) => {
         <div
           className={`mt-auto pt-6 border-t ${isFeatured ? 'border-white/20' : 'border-white/10'} flex flex-col gap-1`}
         >
-          <span className="font-mono text-[10px] uppercase opacity-50">Result / Lesson</span>
+          <span className="font-mono text-[10px] uppercase opacity-50">{t.journey.resultLesson}</span>
           <span
             className={`font-sans text-sm font-semibold ${project.resultType === 'success' ? (isFeatured ? 'text-white' : 'text-green-400') : project.resultType === 'lesson' ? 'italic text-coral-accent' : 'text-red-400'}`}
           >
@@ -149,14 +150,15 @@ const JourneyCard = ({ project, isFeatured, onInView }) => {
 
 const JourneyTimeline = () => {
   const [activeYear, setActiveYear] = useState('2024-2025');
+  const { t } = useLanguage();
 
   const projects = [
     {
       year: '2024-2025',
-      tag: 'KOLABORASI RISET',
-      title: 'Sistem Pemantauan Stunting',
-      desc: 'Platform monitoring data tumbuh kembang anak untuk deteksi dini stunting berkolaborasi dengan tim riset dosen.',
-      result: 'Riset UI/UX',
+      tag: t.journey.projects.stunting.tag,
+      title: t.journey.projects.stunting.title,
+      desc: t.journey.projects.stunting.desc,
+      result: t.journey.projects.stunting.result,
       resultType: 'lesson',
       icon: <Zap size={24} />,
       image:
@@ -164,30 +166,30 @@ const JourneyTimeline = () => {
     },
     {
       year: '2025',
-      tag: 'PROYEK PESANAN',
-      title: 'SAKA (Aplikasi Pintar Bicara Anak)',
-      desc: 'Aplikasi web pesanan guru bahasa Inggris untuk membantu siswa berlatih bicara bahasa Inggris. Dibangun dengan Next.js dan AI untuk latihan bicara interaktif via browser.',
-      result: 'Succesfully Deployed',
+      tag: t.journey.projects.saka.tag,
+      title: t.journey.projects.saka.title,
+      desc: t.journey.projects.saka.desc,
+      result: t.journey.projects.saka.result,
       resultType: 'success',
       icon: <Code size={24} />,
       image: sakaImg,
     },
     {
       year: '2025',
-      tag: 'KEAMANAN & INTEGRITAS',
-      title: 'Sistem CBT Terenkripsi (Exampel)',
-      desc: 'Pengembangan sistem ujian berbasis komputer (CBT) dengan proteksi tingkat lanjut untuk menjaga integritas akademik siswa.',
-      result: 'Anti-Cheat Logic',
+      tag: t.journey.projects.exampel.tag,
+      title: t.journey.projects.exampel.title,
+      desc: t.journey.projects.exampel.desc,
+      result: t.journey.projects.exampel.result,
       resultType: 'lesson',
       icon: <Briefcase size={24} />,
       image: exampelImg,
     },
     {
       year: '2025',
-      tag: 'IMPLEMENTASI UNGGULAN',
-      title: 'HOS-Pass: Presensi Pintar',
-      desc: 'Sistem otomasi presensi biometrik untuk SMA Negeri 4 Pekalongan menggunakan Face Recognition dan Geofencing secara real-time.',
-      result: 'Java Native & Face Recognition',
+      tag: t.journey.projects.hospass.tag,
+      title: t.journey.projects.hospass.title,
+      desc: t.journey.projects.hospass.desc,
+      result: t.journey.projects.hospass.result,
       resultType: 'success',
       icon: <Rocket size={24} />,
       image: hospassImg,
@@ -195,10 +197,10 @@ const JourneyTimeline = () => {
     },
     {
       year: '2025-Now',
-      tag: 'ARSITEKTUR SISTEM',
-      title: 'Sistem Informasi Sekolah Terpadu',
-      desc: 'Pengembangan sistem informasi sekolah yang mengelola data akademik secara terpusat dengan optimasi database untuk efisiensi administrasi.',
-      result: 'Web SIS',
+      tag: t.journey.projects.sisfo.tag,
+      title: t.journey.projects.sisfo.title,
+      desc: t.journey.projects.sisfo.desc,
+      result: t.journey.projects.sisfo.result,
       resultType: 'success',
       icon: <Target size={24} />,
       image: sisfoImg,
@@ -234,6 +236,7 @@ const JourneyTimeline = () => {
               project={proj}
               isFeatured={proj.featured}
               onInView={setActiveYear}
+              t={t}
             />
           ))}
         </div>

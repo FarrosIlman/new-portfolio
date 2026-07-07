@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,9 +17,11 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: 'JOURNEY', href: '#journey' },
-    { name: 'ABOUT', href: '#about' },
-    { name: 'CONTACT', href: '#contact' },
+    { name: t.nav.about, href: '#about' },
+    { name: t.nav.journey, href: '#journey' },
+    { name: t.nav.experience, href: '#experience' },
+    { name: t.nav.education, href: '#education' },
+    { name: t.nav.contact, href: '#contact' },
   ];
 
   return (
@@ -56,22 +60,42 @@ const Navigation = () => {
               </a>
             ))}
           </div>
-          <a
-            href="#contact"
-            className="ml-4 px-6 py-2.5 rounded-full bg-gradient-coral text-white font-sans font-bold text-sm hover:shadow-[0_0_20px_rgba(255,129,88,0.5)] transition-all hover:scale-105 active:scale-95"
-          >
-            Hire me
-          </a>
+          
+          <div className="flex items-center gap-4 ml-4 border-l border-white/10 pl-6">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-white/80 hover:text-white text-xs font-mono font-bold"
+              title="Toggle Language"
+            >
+              <Globe size={14} />
+              <span>{language.toUpperCase()}</span>
+            </button>
+            <a
+              href="#contact"
+              className="px-6 py-2.5 rounded-full bg-gradient-coral text-white font-sans font-bold text-sm hover:shadow-[0_0_20px_rgba(255,129,88,0.5)] transition-all hover:scale-105 active:scale-95 whitespace-nowrap"
+            >
+              Hire me
+            </a>
+          </div>
         </div>
 
-        {/* Mobile Hamburger */}
-        <button
-          aria-label="Toggle mobile menu"
-          className="md:hidden text-white p-2"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* Mobile Hamburger & Lang */}
+        <div className="flex md:hidden items-center gap-4">
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/80 text-xs font-mono font-bold"
+          >
+            <Globe size={14} />
+            <span>{language.toUpperCase()}</span>
+          </button>
+          <button
+            aria-label="Toggle mobile menu"
+            className="text-white p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
@@ -110,3 +134,4 @@ const Navigation = () => {
 };
 
 export default Navigation;
+

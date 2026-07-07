@@ -1,8 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView, animate } from 'framer-motion';
 import confetti from 'canvas-confetti';
+import { useLanguage } from '../context/LanguageContext';
 
 const NumbersWarp = () => {
+  const { t } = useLanguage();
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { amount: 0.5 });
   const [displayValue, setDisplayValue] = useState(0);
@@ -78,7 +80,6 @@ const NumbersWarp = () => {
           ))}
         </motion.div>
 
-        {/* The Giant Number */}
         <motion.div
           className="relative z-10 text-center flex flex-col items-center justify-center"
           initial={{ scale: 0.5, opacity: 0 }}
@@ -94,7 +95,7 @@ const NumbersWarp = () => {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ delay: 0.5, duration: 0.5 }}
           >
-            Projects Delivered
+            {t.numbers.projects}
           </motion.div>
         </motion.div>
       </div>
