@@ -1,6 +1,6 @@
 export const id = {
   nav: {
-    journey: "PERJALANAN",
+    work: "KARYA",
     experience: "PENGALAMAN",
     education: "PENDIDIKAN",
     about: "TENTANG",
@@ -57,15 +57,15 @@ export const id = {
         result: "Riset UI/UX"
       },
       saka: {
-        tag: "PROYEK PESANAN",
-        title: "SAKA (Aplikasi Pintar Bicara Anak)",
+        tag: "PROTOTYPE",
+        title: "Aplikasi Pintar Bicara SAKA",
         shortTitle: "SAKA",
         desc: "Aplikasi web pesanan guru bahasa Inggris untuk membantu siswa berlatih bicara bahasa Inggris. Dibangun dengan Next.js dan AI untuk latihan bicara interaktif via browser.",
         result: "Berhasil Di-deploy"
       },
       exampel: {
-        tag: "KEAMANAN & INTEGRITAS",
-        title: "Sistem CBT Terenkripsi (Exampel)",
+        tag: "PROYEK AKADEMIK",
+        title: "Sistem CBT Terenkripsi",
         shortTitle: "Exampel",
         desc: "Pengembangan sistem ujian berbasis komputer (CBT) dengan proteksi tingkat lanjut untuk menjaga integritas akademik siswa.",
         result: "Logika Anti-Curang"
@@ -159,7 +159,7 @@ export const id = {
 
 export const en = {
   nav: {
-    journey: "JOURNEY",
+    work: "WORK",
     experience: "EXPERIENCE",
     education: "EDUCATION",
     about: "ABOUT",
@@ -216,15 +216,15 @@ export const en = {
         result: "UI/UX Research"
       },
       saka: {
-        tag: "FREELANCE PROJECT",
-        title: "SAKA (Kids Speaking App)",
+        tag: "PROTOTYPE",
+        title: "SAKA Kids Speaking App",
         shortTitle: "SAKA",
         desc: "A commissioned web app for an English teacher to help students practice speaking. Built with Next.js and AI for interactive browser-based speaking practice.",
         result: "Successfully Deployed"
       },
       exampel: {
-        tag: "SECURITY & INTEGRITY",
-        title: "Encrypted CBT System (Exampel)",
+        tag: "ACADEMIC PROJECT",
+        title: "Encrypted CBT System",
         shortTitle: "Exampel",
         desc: "Development of a computer-based test (CBT) system with advanced protection to maintain students' academic integrity.",
         result: "Anti-Cheat Logic"

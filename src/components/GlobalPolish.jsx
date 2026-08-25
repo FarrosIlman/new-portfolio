@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion as Motion, useScroll, useSpring } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
 const GlobalPolish = () => {
@@ -35,7 +35,7 @@ const GlobalPolish = () => {
             particleCount: 150,
             spread: 100,
             origin: { y: 0.1 },
-            colors: ['#ff4d8a', '#ff8158', '#ffffff'],
+            colors: ['#0f172a', '#64748b', '#cbd5e1'],
           });
           setToastMessage('Thanks for visiting! 🎉');
           setTimeout(() => setToastMessage(''), 3000);
@@ -56,22 +56,22 @@ const GlobalPolish = () => {
   return (
     <>
       {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-coral origin-left z-[1000] pointer-events-none"
+      <Motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-slate-900 origin-left z-[1000] pointer-events-none"
         style={{ scaleX }}
       />
 
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-[1000] pointer-events-none">
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="bg-plum-dark/90 backdrop-blur-md border border-white/20 px-6 py-3 rounded-full text-white font-sans text-sm font-bold shadow-2xl"
+            className="bg-white/95 backdrop-blur-md border border-slate-200 px-6 py-3 rounded-full text-slate-900 font-sans text-sm font-bold shadow-xl"
           >
             {toastMessage}
-          </motion.div>
+          </Motion.div>
         </div>
       )}
     </>

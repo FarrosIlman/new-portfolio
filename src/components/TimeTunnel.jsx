@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import farrosImg from '../assets/Farros Ilman.jpg';
+import { motion as Motion, useScroll, useTransform } from 'framer-motion';
 import exampelImg from '../assets/exampel.jpg';
 import sisfoImg from '../assets/sisfo.jpg';
 import hospassImg from '../assets/hospass.jpg';
@@ -38,7 +37,7 @@ const MilestoneCard = ({ item, index, scrollYProgress }) => {
   );
 
   return (
-    <motion.div
+    <Motion.div
       className="absolute preserve-3d"
       style={{
         x: xTransform,
@@ -56,15 +55,15 @@ const MilestoneCard = ({ item, index, scrollYProgress }) => {
           />
         </div>
         <div className="absolute bottom-0 left-0 w-full h-16 flex flex-col items-center justify-center pointer-events-none">
-          <span className="font-sans font-black text-black text-lg sm:text-xl leading-none mb-1 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+          <span className="font-sans font-black text-slate-900 text-lg sm:text-xl leading-none mb-1 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
             {item.title}
           </span>
-          <span className="font-mono text-black/50 text-[10px] sm:text-xs uppercase tracking-widest">
+          <span className="font-mono text-slate-500 text-[10px] sm:text-xs uppercase tracking-widest font-semibold">
             {item.year}
           </span>
         </div>
       </div>
-    </motion.div>
+    </Motion.div>
   );
 };
 
@@ -97,13 +96,13 @@ const TimeTunnel = () => {
   ];
 
   return (
-    <section id="journey" ref={containerRef} className="relative w-full h-[400vh] bg-plum-dark">
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-1000 bg-plum-dark">
+    <section id="journey" ref={containerRef} className="relative w-full h-[400vh] bg-slate-50">
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center perspective-1000 bg-slate-50">
         {/* Perspective World Container (STATIC WORLD) */}
         <div className="absolute w-full h-full preserve-3d flex items-center justify-center">
           {/* Rails / Floor grid to give sense of movement */}
           <div
-            className="absolute bottom-0 left-0 w-full h-[200vh] origin-bottom rotate-x-[80deg] bg-[linear-gradient(rgba(0,242,254,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(0,242,254,0.2)_1px,transparent_1px)] bg-[size:40px_40px] translate-y-1/2 translate-z-[-500px]"
+            className="absolute bottom-0 left-0 w-full h-[200vh] origin-bottom rotate-x-[80deg] bg-[linear-gradient(rgba(148,163,184,0.3)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.3)_1px,transparent_1px)] bg-[size:40px_40px] translate-y-1/2 translate-z-[-500px]"
             style={{
               transformStyle: 'preserve-3d',
               transform: 'rotateX(80deg) translateZ(-200px) translateY(50%)',
@@ -116,7 +115,7 @@ const TimeTunnel = () => {
           ))}
 
           {/* Destination Title */}
-          <motion.div
+          <Motion.div
             className="absolute preserve-3d flex flex-col items-center"
             style={{
               z: titleZ,
@@ -124,18 +123,18 @@ const TimeTunnel = () => {
               scale: titleScale,
             }}
           >
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-sans font-black text-white uppercase tracking-tighter text-glow-cyan text-center">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-sans font-black text-slate-900 uppercase tracking-tighter drop-shadow-sm text-center">
               {t.journey.titlePrefix && <>{t.journey.titlePrefix} <br /></>}
-              <span className="text-gradient-coral">{t.journey.title}</span>
+              <span className="text-gradient-primary">{t.journey.title}</span>
             </h2>
-            <p className="mt-8 text-white/60 font-mono text-sm sm:text-base tracking-[0.3em] uppercase">
+            <p className="mt-8 text-slate-500 font-mono text-sm sm:text-base tracking-[0.3em] uppercase font-semibold">
               {t.tunnel.text}
             </p>
-          </motion.div>
+          </Motion.div>
         </div>
 
         {/* Fog overlay to hide clipping */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(transparent_20%,#0a0810_80%)]"></div>
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(transparent_20%,#f8fafc_80%)]"></div>
       </div>
     </section>
   );

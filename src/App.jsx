@@ -1,10 +1,8 @@
 import React from 'react';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
-import NumbersWarp from './components/NumbersWarp';
 import GalleryThemeSwitch from './components/GalleryThemeSwitch';
 import Manifesto from './components/Manifesto';
-import TimeTunnel from './components/TimeTunnel';
 import JourneyTimeline from './components/JourneyTimeline';
 import ExperienceEducation from './components/ExperienceEducation';
 import ContactCTA from './components/ContactCTA';
@@ -20,12 +18,10 @@ const App = () => {
       <Navigation />
       <main>
         <Hero />
-        <NumbersWarp />
-        <GalleryThemeSwitch />
         <Manifesto />
-        <TimeTunnel />
         <JourneyTimeline />
         <ExperienceEducation />
+        <GalleryThemeSwitch />
         <ContactCTA />
       </main>
       <Footer />

@@ -1,168 +1,179 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, useInView } from 'framer-motion';
-import { Briefcase, Code, Rocket, Target, Zap } from 'lucide-react';
-import sakaImg from '../assets/saka.jpg';
-import hospassImg from '../assets/hospass.jpg';
-import sisfoImg from '../assets/sisfo.jpg';
-import exampelImg from '../assets/exampel.jpg';
+import React from 'react';
+import { motion as Motion } from 'framer-motion';
+import sakaImg from '../assets/saka.webp';
+import hospassImg from '../assets/hospass.webp';
+import sisfoImg from '../assets/sisfo.webp';
+import exampelImg from '../assets/exampel.webp';
 import { useLanguage } from '../context/LanguageContext';
 
-// Reusable Tilt Card Component with Cursor Spotlight
-const JourneyCard = ({ project, isFeatured, onInView, t }) => {
-  const cardRef = useRef(null);
-
-  // Track visibility for scrubber
-  const isInView = useInView(cardRef, { margin: '-40% 0px -40% 0px' });
-
-  useEffect(() => {
-    if (isInView && onInView) {
-      onInView(project.year);
-    }
-  }, [isInView, onInView, project.year]);
-
-  // 3D Tilt Logic
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['5deg', '-5deg']);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-5deg', '5deg']);
-
-  // Spotlight Logic
-  const mouseX = useMotionValue(-1000);
-  const mouseY = useMotionValue(-1000);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-
-    // For Tilt
-    const mouseXRel = (e.clientX - rect.left) / width - 0.5;
-    const mouseYRel = (e.clientY - rect.top) / height - 0.5;
-    x.set(mouseXRel);
-    y.set(mouseYRel);
-
-    // For Spotlight
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-    mouseX.set(-1000);
-    mouseY.set(-1000);
-  };
-
+const ProjectLinks = ({ project }) => {
+  if (!project.demo && !project.repo && !project.caseStudy) return null;
+  
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY }}
-      className={`relative rounded-3xl p-[1px] overflow-hidden preserve-3d h-full ${isFeatured ? 'md:col-span-2' : 'col-span-1'}`}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ margin: '-10%' }}
-    >
-      {/* Rotating Gradient Border */}
-      <div
-        className="absolute inset-0 bg-gradient-to-r from-pink-accent via-coral-accent to-pink-accent opacity-50 animate-[spin_4s_linear_infinite] scale-[2.5]"
-        style={{ transformOrigin: 'center' }}
-      ></div>
+    <div className="flex flex-wrap gap-6 mt-4 md:mt-2">
+      {project.demo && (
+        <a href={project.demo} target="_blank" rel="noreferrer" className="font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-[#111111] hover:text-[#888888] transition-colors border-b border-[#111111] hover:border-[#888888] pb-1">
+          Live Demo ↗
+        </a>
+      )}
+      {project.repo && (
+        <a href={project.repo} target="_blank" rel="noreferrer" className="font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-[#111111] hover:text-[#888888] transition-colors border-b border-[#111111] hover:border-[#888888] pb-1">
+          Repository ↗
+        </a>
+      )}
+      {project.caseStudy && (
+        <a href={project.caseStudy} target="_blank" rel="noreferrer" className="font-mono text-[10px] md:text-[11px] uppercase tracking-widest text-[#111111] hover:text-[#888888] transition-colors border-b border-[#111111] hover:border-[#888888] pb-1">
+          Case Study ↗
+        </a>
+      )}
+    </div>
+  );
+};
 
-      {/* Main Card Content */}
-      <div
-        className={`relative h-full rounded-3xl p-6 md:p-8 backface-hidden ${isFeatured ? 'bg-gradient-coral text-white' : 'bg-plum-dark/95 backdrop-blur-xl text-white'}`}
-      >
-        {/* Cursor Spotlight Effect (Only on non-featured) */}
-        {!isFeatured && (
-          <motion.div
-            className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
-            style={{
-              background: useTransform(
-                [mouseX, mouseY],
-                ([x, y]) =>
-                  `radial-gradient(600px circle at ${x}px ${y}px, rgba(255, 77, 138, 0.15), transparent 40%)`
-              ),
-            }}
-          />
-        )}
-
-        <div className="flex justify-between items-start mb-8">
-          <span
-            className={`font-mono text-[10px] uppercase tracking-widest px-3 py-1 rounded-full ${isFeatured ? 'bg-white/20' : 'bg-white/5 border border-white/10'}`}
-          >
-            {project.tag}
+const ProjectCardPatternA = ({ project, index }) => {
+  return (
+    <div className="mb-16 md:mb-32">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-6 mb-6 md:mb-8">
+        <div>
+          <span className="font-mono text-[10px] md:text-sm text-[#888888] tracking-widest uppercase block mb-1 md:mb-2">
+            0{index + 1}
           </span>
-          <span className="font-sans font-black text-2xl md:text-3xl opacity-20 whitespace-nowrap">
-            {project.year}
-          </span>
+          <h3 className="font-sans font-medium text-lg md:text-5xl lg:text-6xl text-[#111111] leading-tight tracking-tight">
+            {project.title}
+          </h3>
         </div>
+      </div>
 
-        <div className="mb-6 z-10 relative">
-          <div className="w-full aspect-video mb-6 rounded-2xl overflow-hidden shadow-2xl border border-white/10 group relative bg-[#f8f9fa]">
-            {project.image ? (
-              <>
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
-              </>
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-black/50">
-                <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center ${isFeatured ? 'bg-white/20 text-white' : 'bg-pink-accent/10 text-pink-accent'}`}
-                >
-                  {project.icon}
-                </div>
-              </div>
-            )}
-          </div>
+      <Motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full relative aspect-[16/9] md:aspect-[21/9] bg-[#EAEAEA] mb-8 md:mb-12"
+      >
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="w-full h-full object-cover" 
+          loading="lazy"
+        />
+      </Motion.div>
 
-          <h4 className="font-sans font-bold text-lg md:text-xl mb-2">{project.title}</h4>
-          <p
-            className={`font-mono text-sm leading-relaxed ${isFeatured ? 'text-white/90' : 'text-white/60'}`}
-          >
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-12">
+        <div className="md:col-span-8">
+          <p className="font-sans text-[14px] md:text-xl text-[#555555] leading-relaxed">
             {project.desc}
           </p>
         </div>
-
-        <div
-          className={`mt-auto pt-6 border-t ${isFeatured ? 'border-white/20' : 'border-white/10'} flex flex-col gap-1`}
-        >
-          <span className="font-mono text-[10px] uppercase opacity-50">{t.journey.resultLesson}</span>
-          <span
-            className={`font-sans text-sm font-semibold ${project.resultType === 'success' ? (isFeatured ? 'text-white' : 'text-green-400') : project.resultType === 'lesson' ? 'italic text-coral-accent' : 'text-red-400'}`}
-          >
-            {project.result}
+        
+        {/* Mobile Combined Metadata */}
+        <div className="block md:hidden mt-2 border-t border-[#EAEAEA] pt-4">
+          <span className="font-mono text-[11px] text-[#888888] tracking-widest uppercase leading-loose block mb-2">
+            {project.tag} · React · Node.js · {project.year}
           </span>
+          <ProjectLinks project={project} />
+        </div>
+
+        {/* Desktop Metadata */}
+        <div className="hidden md:flex md:col-span-4 flex-col gap-6">
+          <div>
+            <span className="font-mono text-[10px] md:text-xs text-[#555555] tracking-widest uppercase block mb-1">Role & Outcome</span>
+            <span className="font-sans text-sm md:text-base font-semibold text-[#111111]">{project.tag} / {project.result}</span>
+          </div>
+          <div>
+            <span className="font-mono text-[10px] md:text-xs text-[#555555] tracking-widest uppercase block mb-2">Tech Stack</span>
+            <div className="flex flex-wrap gap-2">
+              <span className="font-mono text-[10px] md:text-xs font-medium bg-[#F5F5F5] border border-[#EAEAEA] text-[#111111] px-2 py-1 uppercase">React</span>
+              <span className="font-mono text-[10px] md:text-xs font-medium bg-[#F5F5F5] border border-[#EAEAEA] text-[#111111] px-2 py-1 uppercase">Node.js</span>
+              <span className="font-mono text-[10px] md:text-xs font-medium bg-[#F5F5F5] border border-[#EAEAEA] text-[#111111] px-2 py-1 uppercase">Database</span>
+            </div>
+          </div>
+          <div>
+            <span className="font-mono text-[10px] md:text-xs text-[#555555] tracking-widest uppercase block mb-1">Year</span>
+            <span className="font-sans text-sm md:text-base font-semibold text-[#111111]">{project.year}</span>
+          </div>
+          <ProjectLinks project={project} />
         </div>
       </div>
-    </motion.div>
+    </div>
+  );
+};
+
+const ProjectCardPatternB = ({ project, index }) => {
+  return (
+    <div className="mb-16 md:mb-32 flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-24 items-start">
+      <Motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full md:w-3/5 relative aspect-[4/3] bg-[#EAEAEA]"
+      >
+        <img 
+          src={project.image} 
+          alt={project.title} 
+          className="w-full h-full object-cover" 
+          loading="lazy"
+        />
+      </Motion.div>
+
+      <div className="w-full md:w-2/5 flex flex-col">
+        <span className="font-mono text-[10px] md:text-sm text-[#888888] tracking-widest uppercase block mb-2 md:mb-6">
+          0{index + 1}
+        </span>
+        <h3 className="font-sans font-medium text-lg md:text-5xl text-[#111111] leading-tight tracking-tight mb-4 md:mb-8">
+          {project.title}
+        </h3>
+        <p className="font-sans text-[14px] md:text-lg text-[#555555] leading-relaxed mb-6 md:mb-10">
+          {project.desc}
+        </p>
+
+        {/* Mobile Combined Metadata */}
+        <div className="block md:hidden border-t border-[#EAEAEA] pt-4">
+          <span className="font-mono text-[11px] text-[#888888] tracking-widest uppercase leading-loose block mb-2">
+            {project.tag} · React · Node.js · {project.year}
+          </span>
+          <ProjectLinks project={project} />
+        </div>
+
+        {/* Desktop Metadata */}
+        <div className="hidden md:flex flex-col gap-6 pt-6 md:pt-8 border-t border-[#EAEAEA]">
+          <div>
+            <span className="font-mono text-[10px] md:text-xs text-[#555555] tracking-widest uppercase block mb-1">Role & Outcome</span>
+            <span className="font-sans text-sm md:text-base font-semibold text-[#111111]">{project.tag} / {project.result}</span>
+          </div>
+          <div>
+            <span className="font-mono text-[10px] md:text-xs text-[#555555] tracking-widest uppercase block mb-2">Stack</span>
+            <div className="flex flex-wrap gap-2">
+              <span className="font-mono text-[10px] md:text-xs font-medium bg-[#F5F5F5] border border-[#EAEAEA] text-[#111111] px-2 py-1 uppercase">React</span>
+              <span className="font-mono text-[10px] md:text-xs font-medium bg-[#F5F5F5] border border-[#EAEAEA] text-[#111111] px-2 py-1 uppercase">Node.js</span>
+            </div>
+          </div>
+          <div>
+            <span className="font-mono text-[10px] md:text-xs text-[#555555] tracking-widest uppercase block mb-1">Year</span>
+            <span className="font-sans text-sm md:text-base font-semibold text-[#111111]">{project.year}</span>
+          </div>
+          <ProjectLinks project={project} />
+        </div>
+      </div>
+    </div>
   );
 };
 
 const JourneyTimeline = () => {
-  const [activeYear, setActiveYear] = useState('2024-2025');
   const { t } = useLanguage();
 
   const projects = [
     {
-      year: '2024-2025',
+      year: '2024',
       tag: t.journey.projects.stunting.tag,
       title: t.journey.projects.stunting.title,
       desc: t.journey.projects.stunting.desc,
       result: t.journey.projects.stunting.result,
-      resultType: 'lesson',
-      icon: <Zap size={24} />,
-      image:
-        'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=800',
+      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200',
+      demo: '',
+      repo: '',
+      caseStudy: '',
     },
     {
       year: '2025',
@@ -170,9 +181,10 @@ const JourneyTimeline = () => {
       title: t.journey.projects.saka.title,
       desc: t.journey.projects.saka.desc,
       result: t.journey.projects.saka.result,
-      resultType: 'success',
-      icon: <Code size={24} />,
       image: sakaImg,
+      demo: 'https://saka.malikadigital.my.id',
+      repo: '',
+      caseStudy: '',
     },
     {
       year: '2025',
@@ -180,9 +192,10 @@ const JourneyTimeline = () => {
       title: t.journey.projects.exampel.title,
       desc: t.journey.projects.exampel.desc,
       result: t.journey.projects.exampel.result,
-      resultType: 'lesson',
-      icon: <Briefcase size={24} />,
       image: exampelImg,
+      demo: '',
+      repo: '',
+      caseStudy: '',
     },
     {
       year: '2025',
@@ -190,10 +203,10 @@ const JourneyTimeline = () => {
       title: t.journey.projects.hospass.title,
       desc: t.journey.projects.hospass.desc,
       result: t.journey.projects.hospass.result,
-      resultType: 'success',
-      icon: <Rocket size={24} />,
       image: hospassImg,
-      featured: true,
+      demo: '',
+      repo: '',
+      caseStudy: '',
     },
     {
       year: '2025-Now',
@@ -201,44 +214,32 @@ const JourneyTimeline = () => {
       title: t.journey.projects.sisfo.title,
       desc: t.journey.projects.sisfo.desc,
       result: t.journey.projects.sisfo.result,
-      resultType: 'success',
-      icon: <Target size={24} />,
       image: sisfoImg,
+      demo: '',
+      repo: '',
+      caseStudy: '',
     },
   ];
 
-  const years = ['2024-2025', '2025', '2025-Now'];
-
   return (
-    <section aria-label="Journey Timeline" className="py-24 lg:py-32 px-6 md:px-12 bg-plum-dark relative z-10">
-      {/* Sticky Scrubber */}
-      <div className="sticky top-24 z-50 py-4 mb-12 flex justify-center pointer-events-none">
-        <div className="bg-black/60 backdrop-blur-md border border-white/10 rounded-full px-6 py-2 flex gap-6 pointer-events-auto shadow-2xl transition-all duration-300">
-          {years.map((y) => (
-            <span
-              key={y}
-              className={`font-mono text-xs cursor-pointer transition-all duration-300 whitespace-nowrap ${activeYear === y
-                  ? 'text-white font-bold scale-110 drop-shadow-[0_0_12px_rgba(255,255,255,0.8)]'
-                  : 'text-white/40 hover:text-white/80'
-                }`}
-            >
-              {y}
-            </span>
-          ))}
-        </div>
-      </div>
-
+    <section id="journey" className="py-32 px-6 md:px-12 bg-[#FAFAFA]">
       <div className="container mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((proj, i) => (
-            <JourneyCard
-              key={i}
-              project={proj}
-              isFeatured={proj.featured}
-              onInView={setActiveYear}
-              t={t}
-            />
-          ))}
+        <div className="mb-24 flex flex-col items-start border-b border-[#111111] pb-8">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-sans font-medium tracking-tight text-[#111111]">
+            Selected Work
+          </h2>
+        </div>
+
+        <div>
+          {projects.map((proj, i) => {
+            // Pattern A for evens, Pattern B for odds
+            const isPatternA = i % 2 === 0;
+            return isPatternA ? (
+              <ProjectCardPatternA key={i} project={proj} index={i} />
+            ) : (
+              <ProjectCardPatternB key={i} project={proj} index={i} />
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,157 +1,72 @@
 @import 'tailwindcss';
 
-@variant dark (&:where(.dark, .dark *));
-
 @theme {
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
 
-  --color-plum-dark: #0a0810;
-  --color-pink-accent: #00f2fe;
-  --color-coral-accent: #4facfe;
-  --color-light-bg: #fdf1e3;
-  --color-light-text: #3e2723;
+  --color-brand-bg: #fafafa;
+  --color-brand-text: #111111;
+  --color-brand-subtle: #888888;
 }
 
 :root {
-  transition:
-    background-color 0.8s ease,
-    color 0.8s ease;
-  color-scheme: dark;
-}
-
-body {
-  background-color: var(--color-plum-dark);
-  color: #ffffff;
-  overflow-x: hidden;
-  font-family: 'Inter', system-ui, sans-serif;
-}
-
-/* Light mode overrides (triggered by Gallery section) */
-body.light-theme {
-  background-color: var(--color-light-bg);
-  color: var(--color-light-text);
+  transition: background-color 0.8s ease, color 0.8s ease;
   color-scheme: light;
 }
 
-/* Radial Glow Background */
-body::before {
+body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Beautiful grainy texture for premium feel */
+body::after {
   content: '';
   position: fixed;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 50% 50%, rgba(0, 242, 254, 0.05), transparent 60%);
-  z-index: -2;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  z-index: 9999;
   pointer-events: none;
-}
-
-/* Fine Grain Texture - Desktop Only for Performance */
-@media (min-width: 768px) {
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    opacity: 0.03;
-    z-index: -1;
-    pointer-events: none;
-    mix-blend-mode: overlay; /* overlay is slightly faster than screen, or normal is fastest */
-  }
-  body.light-theme::after {
-    opacity: 0.05;
-  }
-}
-
-/* Gradients */
-.bg-gradient-coral {
-  background: linear-gradient(135deg, var(--color-pink-accent), var(--color-coral-accent));
-}
-
-.text-gradient-coral {
-  background: linear-gradient(135deg, var(--color-pink-accent), var(--color-coral-accent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Base components */
-.hud-panel {
-  background: rgba(10, 8, 16, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 242, 254, 0.2);
-  border-radius: 24px;
-}
-body.light-theme .hud-panel {
-  background: rgba(253, 241, 227, 0.7);
-  border: 1px solid rgba(62, 39, 35, 0.1);
+  mix-blend-mode: multiply;
 }
 
 .font-mono {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: var(--font-mono);
 }
 
 .font-sans {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }
-.perspective-1000 {
-  perspective: 1000px;
-}
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-.backface-hidden {
-  backface-visibility: hidden;
-}
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--color-plum-dark);
+  background: transparent; 
 }
-
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--color-pink-accent), var(--color-coral-accent));
-  border-radius: 8px;
+  background: #d4d4d4; 
+  border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--color-coral-accent), var(--color-pink-accent));
-}
-
-/* Scrollbar on light mode */
-.light-theme::-webkit-scrollbar-track {
-  background: var(--color-light-bg);
-}
-
-.light-theme::-webkit-scrollbar-thumb {
-  background: rgba(62, 39, 35, 0.4);
-}
-
-.light-theme::-webkit-scrollbar-thumb:hover {
-  background: rgba(62, 39, 35, 0.6);
+  background: #a3a3a3; 
 }

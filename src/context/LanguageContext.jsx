@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { createContext, useContext, useState } from 'react';
 import { en, id } from '../locales';
 
 const LanguageContext = createContext();
@@ -8,15 +9,10 @@ export const useLanguage = () => {
 };
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('id'); // Default is id
-
-  useEffect(() => {
-    // Check if there is a saved language preference
+  const [language, setLanguage] = useState(() => {
     const savedLang = localStorage.getItem('portfolio_language');
-    if (savedLang && (savedLang === 'en' || savedLang === 'id')) {
-      setLanguage(savedLang);
-    }
-  }, []);
+    return (savedLang === 'en' || savedLang === 'id') ? savedLang : 'id';
+  });
 
   const toggleLanguage = () => {
     const newLang = language === 'id' ? 'en' : 'id';
