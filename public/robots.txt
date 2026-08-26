@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://farrosilman.vercel.app/sitemap.xml
+Sitemap: https://farrosilman.my.id/sitemap.xml
