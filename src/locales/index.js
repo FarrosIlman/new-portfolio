@@ -49,6 +49,13 @@ export const id = {
     subtitle: "Evolusi Karya",
     resultLesson: "Hasil / Pelajaran",
     projects: {
+      malika: {
+        tag: "SOFTWARE HOUSE & AGENCY",
+        title: "Malika Digital Solutions",
+        shortTitle: "Malika",
+        desc: "Premium software house dan digital agency yang melayani pembuatan aplikasi web (SaaS/ERP), UI/UX design modern, dan pendampingan proyek akademik IT.",
+        result: "End-to-End Solutions"
+      },
       stunting: {
         tag: "KOLABORASI RISET",
         title: "Sistem Pemantauan Stunting",
@@ -92,6 +99,13 @@ export const id = {
     eduTitle: "Pendidikan",
     eduDesc: "Latar belakang akademis dan fondasi ilmu yang saya miliki.",
     jobs: [
+      {
+        role: "Full-Stack Developer",
+        company: "Malika Digital Solutions",
+        location: "Indonesia",
+        period: "2026 - Sekarang",
+        description: "Membangun high-performance web apps (SaaS/ERP), merancang UI/UX modern, serta menyediakan layanan konsultasi dan pendampingan proyek IT profesional."
+      },
       {
         role: "Tenaga Kependidikan - IT",
         company: "SMA Negeri 4 Kota Pekalongan",
@@ -208,6 +222,13 @@ export const en = {
     subtitle: "Evolution of Work",
     resultLesson: "Result / Lesson",
     projects: {
+      malika: {
+        tag: "SOFTWARE HOUSE & AGENCY",
+        title: "Malika Digital Solutions",
+        shortTitle: "Malika",
+        desc: "A premium software house and digital agency providing enterprise web applications (SaaS/ERP), modern UI/UX design, and professional IT consulting.",
+        result: "End-to-End Solutions"
+      },
       stunting: {
         tag: "RESEARCH COLLABORATION",
         title: "Stunting Monitoring System",
@@ -251,6 +272,13 @@ export const en = {
     eduTitle: "Education",
     eduDesc: "My academic background and knowledge foundation.",
     jobs: [
+      {
+        role: "Full-Stack Developer",
+        company: "Malika Digital Solutions",
+        location: "Indonesia",
+        period: "2026 - Present",
+        description: "Building high-performance web apps (SaaS/ERP), designing modern UI/UX interfaces, and providing professional IT consulting and academic project assistance."
+      },
       {
         role: "IT Educational Staff",
         company: "SMA Negeri 4 Kota Pekalongan",

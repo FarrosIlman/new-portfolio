@@ -83,6 +83,13 @@ const TimeTunnel = () => {
 
   const milestones = [
     {
+      year: '2026-Now',
+      z: 0,
+      x: 35,
+      img: 'https://www.malikadigital.my.id/opengraph-image',
+      title: t.journey.projects.malika.shortTitle,
+    },
+    {
       year: '2024-2025',
       z: -500,
       x: -35,

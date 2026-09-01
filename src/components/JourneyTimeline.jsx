@@ -165,6 +165,17 @@ const JourneyTimeline = () => {
 
   const projects = [
     {
+      year: '2026-Now',
+      tag: t.journey.projects.malika.tag,
+      title: t.journey.projects.malika.title,
+      desc: t.journey.projects.malika.desc,
+      result: t.journey.projects.malika.result,
+      image: 'https://www.malikadigital.my.id/opengraph-image',
+      demo: 'https://www.malikadigital.my.id/',
+      repo: '',
+      caseStudy: '',
+    },
+    {
       year: '2024',
       tag: t.journey.projects.stunting.tag,
       title: t.journey.projects.stunting.title,
