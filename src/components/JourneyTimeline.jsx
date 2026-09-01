@@ -170,7 +170,7 @@ const JourneyTimeline = () => {
       title: t.journey.projects.malika.title,
       desc: t.journey.projects.malika.desc,
       result: t.journey.projects.malika.result,
-      image: 'https://www.malikadigital.my.id/opengraph-image',
+      image: '/malika-preview.png',
       demo: 'https://www.malikadigital.my.id/',
       repo: '',
       caseStudy: '',

@@ -86,7 +86,7 @@ const TimeTunnel = () => {
       year: '2026-Now',
       z: 0,
       x: 35,
-      img: 'https://www.malikadigital.my.id/opengraph-image',
+      img: '/malika-preview.png',
       title: t.journey.projects.malika.shortTitle,
     },
     {
