@@ -7,9 +7,9 @@ const PhotoCard = ({ photo, className, index }) => {
     <Motion.div 
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: false, margin: "-50px" }}
       transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className={`relative overflow-hidden rounded-xl shadow-sm bg-white ${className}`}
+      className={`relative overflow-hidden rounded-xl shadow-sm bg-[var(--bg-secondary)] ${className}`}
     >
       <img
         src={photo.src}
@@ -50,18 +50,18 @@ const GalleryThemeSwitch = () => {
   ];
 
   return (
-    <section className="py-32 bg-[#FAFAFA]">
+    <section className="py-32 bg-[var(--bg)]">
       <div className="container mx-auto px-6 md:px-12 max-w-6xl">
         <div className="mb-20 text-center max-w-2xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-sans font-medium tracking-tight text-[#111111] mb-4">
+          <h2 className="text-3xl md:text-4xl font-sans font-medium tracking-tight text-[var(--text)] mb-4">
             Behind the screen
           </h2>
-          <p className="font-sans text-lg text-[#555555] leading-relaxed">
+          <p className="font-sans text-lg text-[var(--text-muted)] leading-relaxed">
             {t.gallery.desc}
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-12 auto-rows-[200px] md:auto-rows-[300px] gap-4 md:gap-8 p-4 md:p-8 bg-white/50 rounded-3xl border border-[#EAEAEA]">
+        <div className="grid grid-cols-2 md:grid-cols-12 auto-rows-[200px] md:auto-rows-[300px] gap-4 md:gap-8 p-4 md:p-8 bg-[var(--bg-secondary)] rounded-3xl border border-[var(--border)]">
           {photos.map((photo, index) => {
              // Warm, personal, slightly padded asymmetrical layout
              let spanClass = "";

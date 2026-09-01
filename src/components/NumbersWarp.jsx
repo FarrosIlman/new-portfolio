@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 const NumbersWarp = () => {
   const { t } = useLanguage();
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { amount: 0.5, once: true });
+  const isInView = useInView(containerRef, { amount: 0.5, once: false });
   const [displayValue, setDisplayValue] = useState(0);
   const targetValue = 5;
 
@@ -25,7 +25,7 @@ const NumbersWarp = () => {
   return (
     <section
       ref={containerRef}
-      className="w-full py-32 bg-[#FAFAFA] flex items-center justify-center border-t border-[#EAEAEA]"
+      className="w-full py-32 bg-[var(--bg)] flex items-center justify-center border-t border-[var(--border)]"
     >
       <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-12 max-w-5xl">
         <Motion.div
@@ -34,10 +34,10 @@ const NumbersWarp = () => {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           className="w-full md:w-1/2"
         >
-          <h2 className="font-sans text-3xl md:text-4xl font-medium text-[#111111] leading-tight tracking-tight mb-4">
+          <h2 className="font-sans text-3xl md:text-4xl font-medium text-[var(--text)] leading-tight tracking-tight mb-4">
             Engineering robust systems from the ground up.
           </h2>
-          <p className="font-mono text-sm text-[#888888] leading-relaxed">
+          <p className="font-mono text-sm text-[var(--subtle)] leading-relaxed">
             {'>'} Scalable architectures<br/>
             {'>'} Performance optimization<br/>
             {'>'} Seamless integrations
@@ -50,10 +50,10 @@ const NumbersWarp = () => {
           transition={{ duration: 1.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="w-full md:w-1/2 flex flex-col items-start md:items-end"
         >
-          <div className="font-sans font-medium text-[6rem] md:text-[10rem] leading-[0.8] tracking-tighter text-[#111111]">
+          <div className="font-sans font-medium text-[6rem] md:text-[10rem] leading-[0.8] tracking-tighter text-[var(--text)]">
             {displayValue}+
           </div>
-          <div className="font-sans text-lg md:text-xl text-[#888888] mt-6 italic">
+          <div className="font-sans text-lg md:text-xl text-[var(--subtle)] mt-6 italic">
             {t.numbers.projects}
           </div>
         </Motion.div>

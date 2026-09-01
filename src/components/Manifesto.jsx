@@ -32,16 +32,16 @@ const Manifesto = () => {
     <section
       ref={containerRef}
       id="about"
-      className="py-24 px-6 md:px-12 bg-[#FAFAFA] relative z-10"
+      className="py-24 px-6 md:px-12 bg-[var(--bg)] relative z-10"
     >
       <div className="container mx-auto max-w-6xl flex flex-col md:flex-row gap-12 lg:gap-24 items-start">
         <div className="w-full md:w-1/4">
-          <h3 className="font-sans text-[#111111] font-medium text-xl md:text-2xl tracking-tight leading-tight">
+          <h3 className="font-sans text-[var(--text)] font-medium text-xl md:text-2xl tracking-tight leading-tight">
             from the <br/> ground up.
           </h3>
         </div>
 
-        <div className="w-full md:w-3/4 font-sans text-[clamp(14px,2vw,1.5rem)] leading-[1.6] text-[#555555]">
+        <div className="w-full md:w-3/4 font-sans text-[clamp(14px,2vw,1.5rem)] leading-[1.6] text-[var(--text-muted)]">
           <p className="mb-8 md:mb-12">
             {words1.map((word, i) => {
               const start = i / totalWords;
@@ -65,9 +65,9 @@ const Manifesto = () => {
             })}
           </p>
 
-          <div className="text-xl sm:text-2xl font-sans font-medium tracking-tight text-[#111111]">
+          <div className="text-xl sm:text-2xl font-sans font-medium tracking-tight text-[var(--text)]">
             <SplitText text="Stay hungry." delay={30} textAlign="left" />
-            <div className="text-[#888888] italic mt-1">
+            <div className="text-[var(--subtle)] italic mt-1">
               <SplitText text="Stay foolish." delay={30} textAlign="left" />
             </div>
           </div>

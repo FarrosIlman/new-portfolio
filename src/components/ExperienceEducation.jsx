@@ -9,7 +9,7 @@ const ExperienceEducation = () => {
   const schools = t.experience.schools || [];
 
   return (
-    <section id="experience" className="py-32 bg-[#FAFAFA]">
+    <section id="experience" className="py-32 bg-[var(--bg)]">
       <div className="container mx-auto px-6 md:px-12 max-w-6xl">
         
         <div className="flex flex-col gap-24">
@@ -17,7 +17,7 @@ const ExperienceEducation = () => {
           {/* EXPERIENCE SECTION */}
           <div>
             <div className="mb-16">
-              <h2 className="text-2xl font-mono font-medium text-[#111111] tracking-widest uppercase">
+              <h2 className="text-2xl font-mono font-medium text-[var(--text)] tracking-widest uppercase">
                 {t.nav.experience || "EXPERIENCE"}
               </h2>
             </div>
@@ -27,18 +27,18 @@ const ExperienceEducation = () => {
                   key={`job-${index}`} 
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: false, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col md:flex-row gap-2 md:gap-16 items-start md:items-baseline pb-8 md:pb-12 border-b border-[#EAEAEA] last:border-b-0"
+                  className="flex flex-col md:flex-row gap-2 md:gap-16 items-start md:items-baseline pb-8 md:pb-12 border-b border-[var(--border)] last:border-b-0"
                 >
                   <div className="w-full md:w-1/4 shrink-0">
-                    <span className="font-mono text-xs md:text-sm tracking-widest text-[#888888] uppercase">{item.period}</span>
+                    <span className="font-mono text-xs md:text-sm tracking-widest text-[var(--subtle)] uppercase">{item.period}</span>
                   </div>
                   
                   <div className="w-full md:w-3/4 flex flex-col">
-                    <h3 className="text-lg md:text-3xl font-sans font-semibold text-[#111111] tracking-tight mb-1 md:mb-2 uppercase">{item.role}</h3>
-                    <h4 className="font-mono text-[13px] md:text-base text-[#555555] mb-4 md:mb-6">{item.company}</h4>
-                    <p className="font-sans text-[14px] md:text-lg text-[#555555] leading-relaxed max-w-2xl">{item.description}</p>
+                    <h3 className="text-lg md:text-3xl font-sans font-semibold text-[var(--text)] tracking-tight mb-1 md:mb-2 uppercase">{item.role}</h3>
+                    <h4 className="font-mono text-[13px] md:text-base text-[var(--text-muted)] mb-4 md:mb-6">{item.company}</h4>
+                    <p className="font-sans text-[14px] md:text-lg text-[var(--text-muted)] leading-relaxed max-w-2xl">{item.description}</p>
                   </div>
                 </Motion.div>
               ))}
@@ -48,7 +48,7 @@ const ExperienceEducation = () => {
           {/* EDUCATION SECTION */}
           <div>
             <div className="mb-16">
-              <h2 className="text-2xl font-mono font-medium text-[#111111] tracking-widest uppercase">
+              <h2 className="text-2xl font-mono font-medium text-[var(--text)] tracking-widest uppercase">
                 {t.nav.education || "EDUCATION"}
               </h2>
             </div>
@@ -58,18 +58,18 @@ const ExperienceEducation = () => {
                   key={`edu-${index}`} 
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
+                  viewport={{ once: false, margin: "-50px" }}
                   transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex flex-col md:flex-row gap-2 md:gap-16 items-start md:items-baseline pb-8 md:pb-12 border-b border-[#EAEAEA] last:border-b-0"
+                  className="flex flex-col md:flex-row gap-2 md:gap-16 items-start md:items-baseline pb-8 md:pb-12 border-b border-[var(--border)] last:border-b-0"
                 >
                   <div className="w-full md:w-1/4 shrink-0">
-                    <span className="font-mono text-xs md:text-sm tracking-widest text-[#888888] uppercase">{item.period}</span>
+                    <span className="font-mono text-xs md:text-sm tracking-widest text-[var(--subtle)] uppercase">{item.period}</span>
                   </div>
                   
                   <div className="w-full md:w-3/4 flex flex-col">
-                    <h3 className="text-lg md:text-3xl font-sans font-semibold text-[#111111] tracking-tight mb-1 md:mb-2 uppercase">{item.degree}</h3>
-                    <h4 className="font-mono text-[13px] md:text-base text-[#555555] mb-4 md:mb-6">{item.institution}</h4>
-                    <p className="font-sans text-[14px] md:text-lg text-[#555555] leading-relaxed max-w-2xl">{item.description}</p>
+                    <h3 className="text-lg md:text-3xl font-sans font-semibold text-[var(--text)] tracking-tight mb-1 md:mb-2 uppercase">{item.degree}</h3>
+                    <h4 className="font-mono text-[13px] md:text-base text-[var(--text-muted)] mb-4 md:mb-6">{item.institution}</h4>
+                    <p className="font-sans text-[14px] md:text-lg text-[var(--text-muted)] leading-relaxed max-w-2xl">{item.description}</p>
                   </div>
                 </Motion.div>
               ))}

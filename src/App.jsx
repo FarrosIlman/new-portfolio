@@ -10,23 +10,26 @@ import Footer from './components/Footer';
 import GlobalPolish from './components/GlobalPolish';
 import BackToTop from './components/BackToTop';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 const App = () => {
   return (
-    <LanguageProvider>
-      <GlobalPolish />
-      <Navigation />
-      <main>
-        <Hero />
-        <Manifesto />
-        <JourneyTimeline />
-        <ExperienceEducation />
-        <GalleryThemeSwitch />
-        <ContactCTA />
-      </main>
-      <Footer />
-      <BackToTop />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <GlobalPolish />
+        <Navigation />
+        <main>
+          <Hero />
+          <Manifesto />
+          <JourneyTimeline />
+          <ExperienceEducation />
+          <GalleryThemeSwitch />
+          <ContactCTA />
+        </main>
+        <Footer />
+        <BackToTop />
+      </LanguageProvider>
+    </ThemeProvider>
   );
 };
 

@@ -4,19 +4,35 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
   --font-sans: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
 
-  --color-brand-bg: #fafafa;
-  --color-brand-text: #111111;
-  --color-brand-subtle: #888888;
+  --color-brand-bg: var(--bg);
+  --color-brand-text: var(--text);
+  --color-brand-subtle: var(--subtle);
 }
 
 :root {
+  --bg: #fafafa;
+  --text: #111111;
+  --subtle: #888888;
+  --text-muted: #555555;
+  --border: #EAEAEA;
+  --bg-secondary: #f8fafc;
   transition: background-color 0.8s ease, color 0.8s ease;
   color-scheme: light;
 }
 
+:root.dark {
+  --bg: #09090b;
+  --text: #fafafa;
+  --subtle: #a1a1aa;
+  --text-muted: #d4d4d8;
+  --border: #27272a;
+  --bg-secondary: #18181b;
+  color-scheme: dark;
+}
+
 body {
-  background-color: var(--color-brand-bg);
-  color: var(--color-brand-text);
+  background-color: var(--bg);
+  color: var(--text);
   overflow-x: hidden;
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
